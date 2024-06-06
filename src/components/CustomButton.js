@@ -22,14 +22,14 @@ const CustomButton = ({ href, text }) => {
           padding: '8px 20px',
           zIndex: '0',
           bottom: 5,
-          right: 15,
+          right: 35,
           transition: 'transform 0.3s, background-color 0.3s',
           transform: 'translate(50%, 50%)',
         },
         '& .button-content': {
           position: 'relative',
-          top:'20px',
-          left: '40px',
+          top:'15px',
+          left: '20px',
           display: 'inline-block',
           backgroundColor: 'white',
           color: '#673ab7',
@@ -40,10 +40,11 @@ const CustomButton = ({ href, text }) => {
         },
         '&:hover .button-content': {
           backgroundColor: 'orange',
-          transform: 'translate(-32%, -32%)',
+        //   transform: 'translate(-32%, -32%)',
         },
         '&:hover::before': {
-          transform: 'translate(-2%, -2%)',
+        //   transform: 'translate(-2%, -2%)',
+        transform: 'translate(28%, 18%)',
         },
       }}
     >
