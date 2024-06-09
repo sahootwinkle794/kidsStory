@@ -5,12 +5,13 @@ import Carousel from 'react-material-ui-carousel';
 import CustomButton from './CustomButton';  // Import the custom button
 
 // Sample images for the carousel
-import bannerImage1 from '../images/banner1.png';
+import bannerImage1 from '../images/banner1.jpg';
+import bannerImage2 from '../images/banner 2.jpg';
 import bannerImage3 from '../images/banner3.jpg';
-import bannerImage4 from '../images/banner4.webp';
-import bannerImage5 from '../images/banner5.webp';
+import bannerImage4 from '../images/banner4.jpg';
+import bannerImage5 from '../images/banner5.jpg';
 
-const images = [bannerImage1, bannerImage3, bannerImage4, bannerImage5];
+const images = [bannerImage1, bannerImage2, bannerImage3, bannerImage4,bannerImage5];
 
 const Banner = () => {
   const carouselItems = images.map((image, index) => (
