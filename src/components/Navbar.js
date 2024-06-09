@@ -1,5 +1,4 @@
-// src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -15,6 +14,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Popper from '@mui/material/Popper';
+import Paper from '@mui/material/Paper';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import MenuList from '@mui/material/MenuList'; // Import MenuList
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,6 +60,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [storyAnchorEl, setStoryAnchorEl] = useState(null);
+  const storyButtonRef = useRef(null);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -64,6 +69,14 @@ const Navbar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleStoryMenuOpen = (event) => {
+    setStoryAnchorEl(event.currentTarget);
+  };
+
+  const handleStoryMenuClose = () => {
+    setStoryAnchorEl(null);
   };
 
   return (
@@ -84,11 +97,19 @@ const Navbar = () => {
           component="div"
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
         >
-          My E-Commerce
+          Kid's Story
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
           <Button color="inherit">Home</Button>
-          <Button color="inherit">Shop</Button>
+          <Button
+            color="inherit"
+            ref={storyButtonRef}
+            onMouseEnter={handleStoryMenuOpen}
+            aria-controls={storyAnchorEl ? 'story-menu' : undefined}
+            aria-haspopup="true"
+          >
+            Story
+          </Button>
           <Button color="inherit">About</Button>
           <Button color="inherit">Contact</Button>
         </Box>
@@ -129,6 +150,26 @@ const Navbar = () => {
         <MenuItem onClick={handleMenuClose}>About</MenuItem>
         <MenuItem onClick={handleMenuClose}>Contact</MenuItem>
       </Menu>
+      <Popper
+        id="story-menu"
+        open={Boolean(storyAnchorEl)}
+        anchorEl={storyButtonRef.current}
+        placement="bottom-start"
+        disablePortal
+        style={{ marginTop: '8px', zIndex: 1300 }} // Added zIndex
+        onMouseEnter={handleStoryMenuOpen}
+        onMouseLeave={handleStoryMenuClose}
+      >
+        <ClickAwayListener onClickAway={handleStoryMenuClose}>
+          <Paper>
+            <MenuList>
+              <MenuItem onClick={handleStoryMenuClose}>Fairytell Story</MenuItem>
+              <MenuItem onClick={handleStoryMenuClose}>Moral Story</MenuItem>
+              <MenuItem onClick={handleStoryMenuClose}>Fun story</MenuItem>
+            </MenuList>
+          </Paper>
+        </ClickAwayListener>
+      </Popper>
     </AppBar>
   );
 };
